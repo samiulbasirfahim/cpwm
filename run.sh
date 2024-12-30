@@ -4,7 +4,7 @@ if [ -z "$XEPHYR" ]; then
     echo "Xephyr not found, exiting"
     exit 1
 fi
-xinit ./xinitrc -- \
+xinit ~/dev/projects/cpwm/xinitrc -- \
     "$XEPHYR" \
         :100 \
         -ac \

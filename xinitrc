@@ -6,4 +6,4 @@ sleep 2 && xclock &
 sleep 5 && xterm &
 
 # 2. Start our window manager.
-exec ~/dev/projects/cpwm/cpwm
+exec ~/dev/projects/cpwm/dist/cpwm

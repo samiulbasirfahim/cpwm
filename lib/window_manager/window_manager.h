@@ -26,9 +26,12 @@ class WindowManager {
     void initHandler();
 
     void handleMapRequest(XEvent &);
+    void handleResizeRequest(XEvent &);
+    void handleConfigureRequest(XEvent &);
 
   public:
     using wmPtr = std::unique_ptr<WindowManager>;
+    ~WindowManager();
     static wmPtr Init();
     bool checkOtherWmRunning();
     void run();

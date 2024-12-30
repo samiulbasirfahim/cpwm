@@ -7,6 +7,12 @@ int main(void) {
     Log::SetLevel(Log::levelDebug);
 
     wmPtr windowManager = WindowManager::Init();
+
+    if (!windowManager) {
+        Log::Error("Failed to initialize window manager");
+        return 1;
+    }
+
     if (windowManager->checkOtherWmRunning()) {
         Log::Error("Another window manager is already running.");
         return 1;

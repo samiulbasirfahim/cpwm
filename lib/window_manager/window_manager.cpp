@@ -1,5 +1,5 @@
 #include "window_manager.h"
-#include <X11/X.h>
+#include "../utility/utility.h"
 #include <iostream>
 
 WindowManager::wmPtr WindowManager::Init() {
@@ -7,6 +7,12 @@ WindowManager::wmPtr WindowManager::Init() {
     if (!display)
         return 0;
     return wmPtr(new WindowManager(display));
+};
+
+
+WindowManager::~WindowManager(){
+    XCloseDisplay(m_display);
+    Log::Debug("Display closed & window manager destroyed");
 };
 
 bool WindowManager::m_otherWmDetected = false;
@@ -33,6 +39,7 @@ bool WindowManager::checkOtherWmRunning() {
 };
 
 void WindowManager::run() {
+    initHandler();
     XEvent ev;
 
     while (!XNextEvent(m_display, &ev)) {
@@ -41,9 +48,3 @@ void WindowManager::run() {
         }
     }
 }
-
-void WindowManager::initHandler() {
-    handlers[MapRequest] = &WindowManager::handleMapRequest;
-}
-
-void WindowManager::handleMapRequest(XEvent &e) {}
